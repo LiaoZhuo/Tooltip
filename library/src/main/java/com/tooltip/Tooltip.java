@@ -44,7 +44,6 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.widget.TextViewCompat;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -411,24 +410,6 @@ public final class Tooltip {
         private OnClickListener mOnClickListener;
         private OnLongClickListener mOnLongClickListener;
         private OnDismissListener mOnDismissListener;
-
-        public Builder(@NonNull MenuItem anchorMenuItem) {
-            this(anchorMenuItem, 0);
-        }
-
-        public Builder(@NonNull MenuItem anchorMenuItem, @StyleRes int resId) {
-            View anchorView = anchorMenuItem.getActionView();
-            if (anchorView != null) {
-                if (anchorView instanceof TooltipActionView) {
-                    TooltipActionView tooltipActionView = (TooltipActionView) anchorView;
-                    tooltipActionView.setMenuItem(anchorMenuItem);
-                }
-
-                init(anchorView.getContext(), anchorView, resId);
-            } else {
-                throw new NullPointerException("anchor menuItem haven`t actionViewClass");
-            }
-        }
 
         public Builder(@NonNull View anchorView) {
             this(anchorView, 0);
