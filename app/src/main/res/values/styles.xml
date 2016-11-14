@@ -21,4 +21,12 @@
         <item name="backgroundColor">@color/colorPrimary</item>
         <item name="cornerRadius">10dp</item>
     </style>
+    <style name="Tooltip3">
+        <item name="android:text">qwqwrqwfqwfqwfqwfqwf</item>
+        <item name="android:textColor">?android:textColorPrimaryInverse</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineSpacingExtra">5dp</item>
+        <item name="backgroundColor">#fbeb8c</item>
+        <item name="cornerRadius">3dp</item>
+    </style>
 </resources>

@@ -111,12 +111,16 @@ public final class Tooltip {
         drawable.setColor(builder.mBackgroundColor);
         drawable.setCornerRadius(builder.mCornerRadius);
 
-        int padding = (int) builder.mPadding;
+//        int padding = (int) builder.mPadding;
+        int leftPadding = (int) builder.mLeftPadding;
+        int topPadding = (int) builder.mTopPadding;
+        int rightPadding = (int) builder.mRightPadding;
+        int bottomPadding = (int) builder.mBottomPadding;
 
         TextView textView = new TextView(builder.mContext);
         TextViewCompat.setTextAppearance(textView, builder.mTextAppearance);
         textView.setText(builder.mText);
-        textView.setPadding(padding, padding, padding, padding);
+        textView.setPadding(leftPadding, topPadding, rightPadding, bottomPadding);
         textView.setLineSpacing(builder.mLineSpacingExtra, builder.mLineSpacingMultiplier);
         textView.setTypeface(builder.mTypeface, builder.mTextStyle);
 
@@ -153,19 +157,19 @@ public final class Tooltip {
         mContentView = new LinearLayout(builder.mContext);
         mContentView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         mContentView.setOrientation(mGravity == Gravity.START || mGravity == Gravity.END ? LinearLayout.HORIZONTAL : LinearLayout.VERTICAL);
-
-        padding = (int) Util.dpToPx(5);
+        mContentView.setBackgroundColor(Color.BLUE);
+//        padding = (int) Util.dpToPx(5);
 
         switch (mGravity) {
             case Gravity.START:
-                mContentView.setPadding(0, 0, padding, 0);
+                mContentView.setPadding(0, 0, rightPadding, 0);
                 break;
             case Gravity.TOP:
             case Gravity.BOTTOM:
-                mContentView.setPadding(padding, 0, padding, 0);
+                mContentView.setPadding(leftPadding, 0, rightPadding, 0);
                 break;
             case Gravity.END:
-                mContentView.setPadding(padding, 0, 0, 0);
+                mContentView.setPadding(leftPadding, 0, 0, 0);
                 break;
         }
 
@@ -384,7 +388,10 @@ public final class Tooltip {
         private float mArrowHeight;
         private float mArrowWidth;
         private float mMargin;
-        private float mPadding;
+        private float mLeftPadding;
+        private float mTopPadding;
+        private float mRightPadding;
+        private float mBottomPadding;
         private float mTextSize;
         private float mLineSpacingExtra;
         private float mLineSpacingMultiplier = 1f;
@@ -442,7 +449,7 @@ public final class Tooltip {
             mArrowDrawable = a.getDrawable(R.styleable.Tooltip_arrowDrawable);
             mMargin = a.getDimension(R.styleable.Tooltip_margin, -1);
             mTextAppearance = a.getResourceId(R.styleable.Tooltip_textAppearance, -1);
-            mPadding = a.getDimension(R.styleable.Tooltip_android_padding, -1);
+//            mPadding = a.getDimension(R.styleable.Tooltip_android_padding, -1);
             mGravity = a.getInteger(R.styleable.Tooltip_android_gravity, Gravity.BOTTOM);
             mText = a.getString(R.styleable.Tooltip_android_text);
             mTextSize = a.getDimension(R.styleable.Tooltip_android_textSize, -1);
@@ -598,17 +605,20 @@ public final class Tooltip {
          *
          * @return This Builder object to allow for chaining of calls to set methods
          */
-        public Builder setPadding(@DimenRes int resId) {
-            return setPadding(mContext.getResources().getDimension(resId));
-        }
+//        public Builder setPadding(@DimenRes int resId) {
+//            return setPadding(mContext.getResources().getDimension(resId));
+//        }
 
         /**
          * Sets Tooltip padding.
          *
          * @return This Builder object to allow for chaining of calls to set methods
          */
-        public Builder setPadding(float padding) {
-            mPadding = padding;
+        public Builder setPadding(float leftPadding, float topPadding, float rightPadding, float bottomPadding) {
+            this.mLeftPadding = leftPadding;
+            this.mRightPadding = rightPadding;
+            this.mTopPadding = topPadding;
+            this.mBottomPadding = bottomPadding;
             return this;
         }
 
@@ -768,8 +778,17 @@ public final class Tooltip {
             if (mMargin == -1) {
                 mMargin = mContext.getResources().getDimension(R.dimen.default_tooltip_margin);
             }
-            if (mPadding == -1) {
-                mPadding = mContext.getResources().getDimension(R.dimen.default_tooltip_padding);
+            if (mLeftPadding == -1) {
+                mLeftPadding = mContext.getResources().getDimension(R.dimen.default_tooltip_padding);
+            }
+            if (mTopPadding == -1) {
+                mTopPadding = mContext.getResources().getDimension(R.dimen.default_tooltip_padding);
+            }
+            if (mRightPadding == -1) {
+                mRightPadding = mContext.getResources().getDimension(R.dimen.default_tooltip_padding);
+            }
+            if (mBottomPadding == -1) {
+                mBottomPadding = mContext.getResources().getDimension(R.dimen.default_tooltip_padding);
             }
             return new Tooltip(this);
         }
