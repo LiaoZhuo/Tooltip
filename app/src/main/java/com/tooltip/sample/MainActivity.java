@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                             .setArrowHeight(12f)
                             .setArrowWidth(24f)
                             .setMargin(9f)
-                            .setPadding(60f)
+                            .setPadding(60, -1, -1, -1)
                             .setText("I`m on the bottom of first menu item and showing dynamically on menu item click. I am programming and how are you?")
                             .show();
                 } else {
